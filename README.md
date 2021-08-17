@@ -21,3 +21,13 @@ npm install
 You can also deploy this app to Heroku:
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+
+# deploy to production
+```
+git push heroku main
+```
+
+# deploy to local
+```
+heroku local web
+```

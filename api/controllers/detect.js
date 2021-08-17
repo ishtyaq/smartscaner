@@ -56,9 +56,23 @@ exports.start_process = async function startProcess(fileData, requestUrl, res){
   let predictionResult =  await predict(fileData, requestUrl);
     let ocrresult = await OCRSpaceScan(fileData);
     //[0]["TextOverlay"], ocrparsedtext:ocrresult[0]["ParsedText"]
-      var scanresult = { predictions: predictionResult, ocr: ocrresult };
-    res.send(`loaded ${JSON.stringify(scanresult)}`);
-  
+    let index=0, matched=0;
+    for (let i = 0; i < maxPredictions; i++) {
+      if(i==0){
+        matched = prediction[i].probability;
+      }
+      else if(matched < prediction[i].probability ){
+        matched = prediction[i].probability;
+        index = i;
+      }
+    }
+    console.log(ocrresult);
+      var scanresult = { predictions: predictionResult[index], ocr: ocrresult[0]["TextOverlay"] };
+    //res.send(`loaded ${JSON.stringify(scanresult)}`);
+    res.status(200).send({
+        ok: true,
+        result: JSON.stringify(scanresult)
+    });
  
   console.log('End Process..');
  

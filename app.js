@@ -9,9 +9,14 @@ app.use('/uploads', express.static('uploads'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
  
+const authRouter = require("./api/routes/authRoutes");
+var docRoutes = require("./api/routes/documentRoutes"); 
 
-var routes = require('./api/routes/documentRoutes'); //importing route
-routes(app); //register the route
+
+//docRoutes(app); //register the route
+app.use("/api/auth", authRouter);
+app.use("/api/documents", docRoutes);
+
 // app.use("/orders", orderRoutes);
 app.use(function(req, res, next) {
     res.status(error.status || 500);
