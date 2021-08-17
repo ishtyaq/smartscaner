@@ -71,7 +71,7 @@ exports.start_process = async function startProcess(fileData, requestUrl, res){
     //res.send(`loaded ${JSON.stringify(scanresult)}`);
     res.status(200).send({
         ok: true,
-        result: JSON.stringify(scanresult)
+        result: scanresult
     });
  
   console.log('End Process..');
