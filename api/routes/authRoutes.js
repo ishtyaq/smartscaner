@@ -9,7 +9,7 @@ const router = express.Router();
 // On post
 router.post("/", async (req, res) => {
     // Dummy data
-    const users = [{ username: "microvision", password: "$2b$15$zqY2Q4eOoGzFpZkHJz9HS.BSfXc/HM2E/yTWa1awFmTMgN2bE72Uu", roles: ["admin", "editor", "viewer"] }];
+    const users = [{ username: "microvision", password: "$2b$15$hainpV6yqlsBFgWXluCCUe5gLAX6O42i8on9tkeLSWvN0/tvNRolq", roles: ["admin", "editor", "viewer"] }];
 
     // Get to user from the database, if the user is not there return error
     let user = users.find(u => u.username === req.body.username);
