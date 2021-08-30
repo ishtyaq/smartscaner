@@ -31,9 +31,16 @@ async function detectApp() {
 
 // run the webcam image through the image model
 function predict(fileData, requestUrl) {
-    const model = new TeachableMachine({
-      modelUrl: URL
-    });
+    let model;
+    try{
+      model = new TeachableMachine({
+        modelUrl: URL
+      });
+    }
+    catch(e){
+      return null;
+    }
+   
     console.log('inside predict');
     return model.classify({
       imageUrl:   requestUrl   + fileData,
@@ -59,17 +66,22 @@ console.log(requestUrl);
     let ocrresult = await OCRSpaceScan(fileData);
     //[0]["TextOverlay"], ocrparsedtext:ocrresult[0]["ParsedText"]
     let index=0, matched=0;
-    for (let i = 0; i < maxPredictions; i++) {
-      if(i==0){
-        matched = prediction[i].probability;
+    let prediction=null;
+    if(predictionResult!=null){
+      for (let i = 0; i < predictionResult.length; i++) {
+        if(i==0){
+          matched = predictionResult[i].probability;
+        }
+        else if(matched < predictionResult[i].probability ){
+          matched = predictionResult[i].probability;
+          index = i;
+        }
       }
-      else if(matched < prediction[i].probability ){
-        matched = prediction[i].probability;
-        index = i;
-      }
+      prediction = predictionResult[index];
     }
+    
     console.log(ocrresult);
-      var scanresult = { predictions: predictionResult[index], ocr: ocrresult[0]["TextOverlay"] };
+      var scanresult = { predictions: prediction, ocr: ocrresult[0]["TextOverlay"] };
     //res.send(`loaded ${JSON.stringify(scanresult)}`);
     res.status(200).send({
         ok: true,
