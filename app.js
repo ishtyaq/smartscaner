@@ -19,7 +19,7 @@ app.use("/api/documents", docRoutes);
 
 // app.use("/orders", orderRoutes);
 app.use(function(req, res, next) {
-    res.status(error.status || 500);
+    res.status(req.status || 500);
     res.json({
         error: {
         message: error.message

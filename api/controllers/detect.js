@@ -82,9 +82,10 @@ function OCRSpaceScan(imageFilePath)
 {
   // Image file to upload
  // const imageFilePath = `${__dirname}/loveText.jpg`
+ console.log(imageFilePath.split('.'));
   var options =  { 
     apiKey  : 'af3ece4fef88957',
-    filetype: 'jpg|png|jpeg',
+    filetype: imageFilePath.split('.')[1],
     verbose : true,
     language: 'ara',
     OCREngine:1,

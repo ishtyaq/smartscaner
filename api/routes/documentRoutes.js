@@ -41,7 +41,7 @@ var upload = multer({
     
         // Set the filetypes, it is optional
         var filetypes = /jpeg|jpg|png/;
-        var mimetype = filetypes.test(file.mimetype);
+        var mimetype = true;//  filetypes.test(file.mimetype);
 
         
 
