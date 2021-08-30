@@ -84,7 +84,7 @@ function OCRSpaceScan(imageFilePath)
  // const imageFilePath = `${__dirname}/loveText.jpg`
   var options =  { 
     apiKey  : 'af3ece4fef88957',
-    filetype: 'jpg',
+    filetype: 'jpg|png|jpeg',
     verbose : true,
     language: 'ara',
     OCREngine:1,
