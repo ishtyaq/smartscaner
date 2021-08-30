@@ -2,14 +2,12 @@ const TeachableMachine = require("@sashido/teachablemachine-node");
 const ocrSpaceApi2 = require('ocr-space-api-alt2')
 
 let net;
-const URL = 'https://teachablemachine.withgoogle.com/models/dfNBM-C8y/';
+const URL =  'https://teachablemachine.withgoogle.com/models/dfNBM-C8y/';
 let   labelContainer, maxPredictions;
 let fileData;
 let firstResult;
 
-const model = new TeachableMachine({
-  modelUrl: URL
-});
+
 async function detectApp() {
  // $('#progressbar').show();
   console.log('Loading mobilenet..');
@@ -20,8 +18,8 @@ async function detectApp() {
   //$('#prediction-list').append('Model Loaded');
 
   // custom model
-  const modelURL = URL + "model.json";
-  const metadataURL = URL + "metadata.json";
+  const modelURL = URL + "/mymodel/model.json";
+  const metadataURL = URL + "/mymodel/metadata.json";
 
    
   console.log('finished loading detectApp..')
@@ -33,6 +31,9 @@ async function detectApp() {
 
 // run the webcam image through the image model
 function predict(fileData, requestUrl) {
+    const model = new TeachableMachine({
+      modelUrl: URL
+    });
     console.log('inside predict');
     return model.classify({
       imageUrl:   requestUrl   + fileData,
@@ -46,8 +47,9 @@ function predict(fileData, requestUrl) {
 }
 exports.start_process = async function startProcess(fileData, requestUrl, res){
 //  $('#progressbar').show();
-  const modelURL = URL + "model.json";
-  const metadataURL = URL + "metadata.json";
+console.log(requestUrl);
+  const modelURL = requestUrl + "/mymodel/model.json";
+  const metadataURL = requestUrl + "/mymodel/metadata.json";
 
   console.log('startProcess..');
   //$("#prediction-list").empty();

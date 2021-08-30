@@ -6,6 +6,7 @@ const TeachableMachine = require("@sashido/teachablemachine-node");
 
 
 app.use('/uploads', express.static('uploads'));
+app.use('/mymodel', express.static('mymodel'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
  
