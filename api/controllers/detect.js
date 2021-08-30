@@ -49,6 +49,7 @@ function predict(fileData, requestUrl) {
       return predictions;
     }).catch((e) => {
       console.log("ERROR", e);
+      return null;
     });
     
 }
@@ -81,7 +82,14 @@ console.log(requestUrl);
     }
     
     console.log(ocrresult);
-      var scanresult = { predictions: prediction, ocr: ocrresult[0]["TextOverlay"] };
+    let textOverlay;
+    if(ocrresult!=null){
+      textOverlay=ocrresult[0]["TextOverlay"];
+    }
+    else{
+      textOverlay = "Error in processing the OCR";
+    }
+      var scanresult = { predictions: prediction, ocr: textOverlay};
     //res.send(`loaded ${JSON.stringify(scanresult)}`);
     res.status(200).send({
         ok: true,
@@ -137,10 +145,12 @@ function OCRSpaceScan(imageFilePath)
     // console.log(data1["ParsedResults"]);
      let ParsedResults = data1["ParsedResults"];
         
-       console.log(ParsedResults[0]["TextOverlay"]);
+       //console.log(ParsedResults[0]["TextOverlay"]);
        return ParsedResults;
     } catch (error) {
+      
       console.error(error)
+      return null;
     }
   }
 
