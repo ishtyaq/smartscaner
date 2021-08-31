@@ -63,7 +63,7 @@ console.log(requestUrl);
   //$("#prediction-list").empty();
   // let predictionResult =  await predict(fileData, requestUrl);
    
-  let predictionResult =  await predict(fileData, requestUrl);
+  let predictionResult =  null; // await predict(fileData, requestUrl);
     let ocrresult = await OCRSpaceScan(fileData);
     //[0]["TextOverlay"], ocrparsedtext:ocrresult[0]["ParsedText"]
     let index=0, matched=0;
