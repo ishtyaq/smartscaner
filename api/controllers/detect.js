@@ -89,7 +89,10 @@ console.log(requestUrl);
     else{
       textOverlay = "Error in processing the OCR";
     }
-      var scanresult = { predictions: prediction, ocr: textOverlay};
+    const tempPrediction = [
+        { class: "Sharjah City Municpality", score :  0.5932877063751221}
+    ];
+    var scanresult = { predictions: tempPrediction, ocr: textOverlay};
     //res.send(`loaded ${JSON.stringify(scanresult)}`);
     res.status(200).send({
         ok: true,
